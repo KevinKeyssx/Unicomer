@@ -1,6 +1,3 @@
-/**
- * SmartNewGen exclusive class, all rights reserved
- */
 package unicomer.backend.api.data;
 
 import java.io.Serializable;

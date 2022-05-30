@@ -9,8 +9,6 @@ services:
       - POSTGRES_PASSWORD=1234
     ports:
       - 5432:5432
-    networks:
-      - shared-net
     volumes:
       - /data/db:/data/db
 
@@ -21,11 +19,11 @@ services:
       - postgres-bd
     links:
       - postgres-bd
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-bd:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=1234
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_SHOW_SQL=true
     ports:
       - 8030:8030
-    networks:
-      - shared-net
-
-networks:
-  shared-net:
-    driver: bridge
