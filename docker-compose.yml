@@ -1,0 +1,31 @@
+version: '3.7'
+services:
+  postgres-bd:
+    image: postgres:14.3-alpine
+    container_name: postgres-bd
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+    ports:
+      - 5432:5432
+    networks:
+      - shared-net
+    volumes:
+      - /data/db:/data/db
+
+  unicomer-api:
+    image: unicomer-api:0.0.1
+    container_name: springboot-app
+    depends_on:
+      - postgres-bd
+    links:
+      - postgres-bd
+    ports:
+      - 8030:8030
+    networks:
+      - shared-net
+
+networks:
+  shared-net:
+    driver: bridge
