@@ -33,6 +33,6 @@ El servicio de spring boot se levanta en el puerto 8030
 La Base de datos springboot se levanta en el puerto 5432 que viene por defecto
 
 La aplicación está funcionando con swagger
-    ~~~
-    http://localhost:8030/swagger-ui/index.html 
-    ~~~
+~~~
+http://localhost:8030/swagger-ui/index.html 
+~~~
