@@ -1,0 +1,29 @@
+version: '3.7'
+services:
+  postgres-bd:
+    image: postgres:14.3-alpine
+    container_name: postgres-bd
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+    ports:
+      - 5432:5432
+    volumes:
+      - /data/db:/data/db
+
+  unicomer-api:
+    image: unicomer-api:0.0.1
+    container_name: springboot-app
+    depends_on:
+      - postgres-bd
+    links:
+      - postgres-bd
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-bd:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=1234
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_SHOW_SQL=true
+    ports:
+      - 8030:8030
